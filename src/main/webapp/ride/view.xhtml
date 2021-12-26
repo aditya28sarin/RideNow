@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+<ui:composition template="/template/siteTemplate.xhtml">
+    <ui:define name="title">
+        <h:outputText value="Ride Details"/>
+    </ui:define>
+    <ui:define name="editableContent">
+
+        <h:outputStylesheet name="/css/primeflex.min.css"/>
+        <h:form id="rideDetails">
+            <div class="p-grid">
+                <div class="p-col-4 leftSide">
+                    <img src="#{rideController.staticMapImageUrl}"
+                         style="height:60vh; width:auto; float:left; padding-left:10px; border:none;"
+                         alt="Ride Map"/>
+                </div>
+
+                <div class="p-col-8" style="position: relative">
+                    <div style="margin-left: 1.5rem" class="riderSignUpHeading">
+                        <h1>RIDE DETAILS</h1>
+                    </div>
+
+                    <h:panelGrid columns="2" columnClasses="panelGridColumn1, panelGridColumn2" cellspacing="30">
+
+
+                        <h:outputText styleClass="rideDetailip" value="Driver "/>
+                        <h:outputText styleClass="rideDetailop" value="#{rideController.driver.name}"/>
+
+                        <h:outputText styleClass="rideDetailip" value="Start Location "/>
+                        <h:outputText styleClass="rideDetailop"
+                                      value="#{rideController.selected.startLocation.landmarkName}"/>
+
+                        <h:outputText styleClass="rideDetailip" value="End Location "/>
+                        <h:outputText styleClass="rideDetailop"
+                                      value="#{rideController.selected.destinationLocation.landmarkName}"/>
+
+                        <h:outputText styleClass="rideDetailip" value="Start Time "/>
+                        <h:outputText styleClass="rideDetailop"
+                                      value="#{rideController.getFormattedDate(rideController.selected.startTime)}"/>
+
+                        <h:outputText styleClass="rideDetailip" value="Start - Destination distance "/>
+                        <h:outputText styleClass="rideDetailop" value="#{rideController.startDestinationDistance}"/>
+
+                        <h:outputText styleClass="rideDetailip" value="Start - Destination estimated ride time "/>
+                        <h:outputText styleClass="rideDetailop"
+                                      value="#{rideController.startDestinationEstimatedTime}"/>
+
+                        <h:outputText styleClass="rideDetailip" value="Ride Type "/>
+                        <p:selectOneRadio id="rideType" value="#{rideController.rideType}" layout="grid" columns="2"
+                                          styleClass=" rideDetailop grid-radio" update=":rideDetails" ajax="true"
+                                          required="true" requiredMessage="Ride Fare is required">
+                            <f:selectItem itemLabel="Free" itemValue="Free"/>
+                            <f:selectItem itemLabel="Paid" itemValue="Paid"/>
+                            <p:ajax update=":rideDetails"/>
+                        </p:selectOneRadio>
+
+                    </h:panelGrid>
+                    &nbsp; &nbsp;
+                    <c:if test="#{rideController.rideType == 'Paid'}">
+                        <div style="margin-bottom: 2rem; margin-left: 1.5rem">
+                            <p:commandButton id="fareEstimate" value="Get Fare Estimate" icon="fa fa-car"
+                                             styleClass="ui-button-outlined ui-button-secondary"
+                                             update=":rideDetails" ajax="true"
+                                             action="#{rideController.getFareEstimate(rideController.startDestinationDistance, rideController.startDestinationEstimatedTime)}"/>
+
+                            &nbsp; &nbsp;
+                            <p:commandButton id="fareChart" value="Fare Estimation Chart" icon="fas fa-eye"
+                                             styleClass="ui-button-outlined ui-button-secondary"
+                                             oncomplete="PF('FareEstimationChartDialog').show()"/>
+
+                        </div>
+
+
+                        <h:panelGrid style="margin-left: 1rem" cellspacing="10" columns="2"
+                                     columnClasses="panelGridColumn1, panelGridColumn2">
+                            <h:outputText styleClass="rideDetailip" value="Total Estimated ride fare: "/>
+                            <h:outputText styleClass="rideDetailop"
+                                          value="$ #{rideController.getCustomRideFare() * rideController.selected.driverID.cabId.capacity}"/>
+                            <h:outputText styleClass="rideDetailip" value="Estimated ride fare(per rider): "/>
+                            <h:outputText styleClass="rideDetailop" value="$ #{rideController.getCustomRideFare()}"/>
+                            <br/>
+                            <h:outputText>You can add your custom amount below</h:outputText>
+                            <h:outputText styleClass="rideDetailip" value="Custom ride fare(per rider): "/>
+                            <h:inputText styleClass="rideDetailop" value="#{rideController.estimatedRideFare}"/>
+                        </h:panelGrid>
+                    </c:if>
+                    <br/> <br/><br/>
+                    <div align="center" style="margin:1rem 0">
+                        <!-- SAVE button -->
+                        <p:commandButton value="Save" icon="fas fa-save"
+                                         style="position: absolute; left: 250px; bottom: -15px;"
+                                         styleClass="rounded-button ui-button-secondary"
+                                         ajax="false" action="#{rideController.updateRide()}"
+                                         update=":growlInfoMessage,:growlWarningMessage,:growlErrorMessage,:growlFatalMessage"/>
+                    </div>
+
+                    <br/><br/>
+
+                </div>
+                <br/><br/>
+            </div>
+
+            <br/><br/>
+
+
+        </h:form>
+
+        <ui:include src="/ride/fareEstimationChart.xhtml"/>
+
+    </ui:define>
+</ui:composition>
+</html>

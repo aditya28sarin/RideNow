@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pe="http://primefaces.org/ui">
+
+    <!-- This page is constructed based on the siteTemplate -->
+    <ui:composition template="/template/siteTemplate.xhtml">
+
+        <ui:define name="editableContent">
+            <div align="center">
+
+                <div class="homeTop">
+                    <div class="homeTopImg">
+                        <p:graphicImage styleClass="homeImg" value="/resources/images/transparent2.png" />
+                    </div>
+                    <div class="homeTopText">
+                        Same Destination, More Companions!
+                    </div>
+                </div>
+
+                <h3 id="homePageHeading">How it works?</h3>
+                <hr />
+                <br/>
+                <br/>
+
+                <div class="timelineView">
+                    <div class="card timelinecard">
+
+                        <h3 class="homePageSubHeading">Rider</h3>
+                        <hr />
+                        <br/>
+                        <br/>
+
+                        <h:form>
+
+                            <p:chronoline value="#{chronolineView.events}" var="event" align="alternate" styleClass="customized-chronoline">
+
+                                <p:card styleClass="cardEach" style="background-color: white; border: none">
+                                    <f:facet name="title">
+                                        <div style="font-size: 1.1rem">#{event.header}</div>
+                                    </f:facet>
+                                    <f:facet name="subtitle">
+                                        <div>#{event.stepNo}</div>
+                                    </f:facet>
+                                    <div>#{event.info}</div>
+<!--                                    <p:commandButton value="Read more" styleClass="ui-button-secondary ui-button-flat" />-->
+                                </p:card>
+
+                                <f:facet name="marker">
+                                    <span class="custom-marker p-shadow-2" style="background-color: #ffffff; padding:4px"><i class="pi pi-users"/></span>
+                                </f:facet>
+                            </p:chronoline>
+
+                        </h:form>
+                    </div>
+
+                    <div class="card timelinecard">
+
+                        <h3 class="homePageSubHeading">Driver</h3>
+                        <hr />
+                        <br/>
+                        <br/>
+
+                        <h:form>
+
+                            <p:chronoline value="#{chronolineView.events2}" var="event" align="alternate" styleClass="customized-chronoline">
+
+                                <p:card styleClass="cardEach" style="background-color: white; border: none">
+                                    <f:facet name="title">
+                                        <div style="font-size: 1.1rem">#{event.header}</div>
+                                    </f:facet>
+                                    <f:facet name="subtitle">
+                                        <div>#{event.stepNo}</div>
+                                    </f:facet>
+                                    <div>#{event.info}</div>
+<!--                                    <p:commandButton value="Read more" styleClass="ui-button-secondary ui-button-flat" />-->
+                                </p:card>
+
+                                <f:facet name="marker">
+                                    <span class="custom-marker p-shadow-2" style="background-color: #ffffff; padding:4px"><i class="pi pi-users"/></span>
+                                </f:facet>
+                            </p:chronoline>
+
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

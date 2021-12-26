@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/template/siteTemplate.xhtml">
+    <ui:define name="title">
+        <h:outputText value="Available Rides"/>
+    </ui:define>
+
+    <ui:define name="editableContent">
+
+        <div align="center">
+            <h:form id="AvailableRidesListForm">
+                <p:panel header="Available Rides">
+
+                    <p:dataTable id="datalist2"
+                                 value="#{rideController.listOfAvailableRides}"
+                                 var="aRide"
+                                 widgetVar="availableRidesDataTable"
+                                 selectionMode="single"
+                                 selection="#{rideController.selected}"
+                                 reflow="true"
+                                 rowKey="#{aRide.id}"
+                                 rows="5"
+                                 paginatorTemplate="{PreviousPageLink} {NextPageLink}"
+                                 scrollable="true"
+                                 scrollHeight="400"
+                                 emptyMessage="No Rides Available"
+                                 rowIndexVar="rowNumber"
+                                 first="#{rideController.selectedRowNumber}">
+
+                        <p:ajax event="rowSelect"
+                                update="createButton viewButton viewDriverButton">
+                            #{rideController.setSelectedRowNumber(rowNumber)};
+                        </p:ajax>
+
+                        <p:ajax event="rowUnselect"
+                                update="createButton viewButton viewDriverButton"/>
+
+                        <!--  Column Ride Start Location    -->
+                        <p:column sortBy="#{aRide.startLocation.landmarkName}" headerText="Start Location"
+                                  style="width: 65px" filterBy="#{aRide.startLocation.landmarkName}"
+                                  filterMatchMode="contains">
+                            <h:outputText value="#{aRide.startLocation.landmarkName}"/>
+                        </p:column>
+
+                        <!--  Column Ride Destination Location    -->
+                        <p:column sortBy="#{aRide.destinationLocation.landmarkName}" headerText="Destination"
+                                  style="width: 65px" filterBy="#{aRide.destinationLocation.landmarkName}"
+                                  filterMatchMode="contains">
+                            <h:outputText value="#{aRide.destinationLocation.landmarkName}"/>
+                        </p:column>
+
+                        <!--  Column Riders   -->
+                        <p:column sortBy="#{aRide.seats}" headerText="Seats" style="width:30px;"
+                                  filterBy="#{aRide.seats}" filterMatchMode="contains">
+                            <div align="center"><h:outputText value="#{aRide.seats}"/></div>
+                        </p:column>
+
+                        <!--  Column Ride Start Time    -->
+                        <p:column sortBy="#{aRide.tripStartTime}" headerText="Start Time" style="width:50px;"
+                                  filterBy="#{aRide.tripStartTime}" filterMatchMode="contains">
+                            <div align="center"><h:outputText value="#{rideController.getFormattedDate(aRide.tripStartTime)}"/></div>
+                        </p:column>
+
+<!--                        driver interest-->
+                        <p:column sortBy="#{aRide.driverID.interests}" headerText="Driver's Interests"
+                                  style="width:60px;"
+                                  filterBy="#{aRide.driverID}" filterMatchMode="contains">
+                            <div align="center"><h:outputText value="#{aRide.driverID.interests}"/></div>
+                        </p:column>
+
+                        <!--  Column Ride Status    -->
+                        <p:column sortBy="#{rideController.getRideStatus(aRide.status)}"
+                                  headerText="Status"
+                                  style="width: 60px" filterBy="#{aRide.status}" filterMatchMode="contains">
+                            <h:outputText value="#{rideController.getRideStatus(aRide.status)}"/>
+                        </p:column>
+
+                        <!--  Column Ride Fare    -->
+                        <p:column sortBy="#{rideController.getRideStatus(aRide.fare)}"
+                                  headerText="Fare"
+                                  style="width: 30px" filterBy="#{aRide.fare}" filterMatchMode="contains">
+                            <h:outputText value="$ #{aRide.fare}"/>
+                        </p:column>
+
+                        <!--  Driver Rating    -->
+                        <p:column sortBy="#{aRide.driverID.overallRating}"
+                                  headerText="Driver Rating" width="100px" filterBy="#{aRide.driverID.overallRating}" filterMatchMode="contains">
+                            <!--                            <h:outputText style="display: block; width:100%; text-align:center;" value="#{aDriverRide.driverRating}"/>-->
+                            <p:rating style="display: block; width:100%; text-align:center;" value="#{rideController.getRatingInt(aRide.driverID.overallRating)}" readonly="true" />
+                        </p:column>
+
+                        <p:column
+                                  headerText="Driver" width="80px" filterBy="#{aRide.driverID.name}" filterMatchMode="contains">
+
+                            <h:outputText value="#{aRide.driverID.name}"/>
+                        </p:column>
+
+                        <p:column sortBy="#{aRide.driverID.gender}"
+                                headerText="Driver Gender" width="40px" filterBy="#{aRide.driverID.gender}" filterMatchMode="contains">
+
+                            <h:outputText value="#{aRide.driverID.gender}"/>
+                        </p:column>
+
+                        <f:facet name="footer">
+                            <div align="center">
+<!--                                create ride button-->
+                                <p:commandButton id="createButton" value="Join Ride" icon="fas fa-plus"
+                                                 styleClass="rounded-button ui-button-secondary"
+                                                 action="#{rideController.joinRide()}"
+                                                 update=":AvailableRidesListForm,:growlInfoMessage,:growlWarningMessage,:growlErrorMessage,:growlFatalMessage"
+                                                 disabled="#{empty rideController.selected}">
+
+                                    <p:confirm header="Join Confirmation"
+                                               message="You will be charged $#{rideController.selected.fare} for this ride, do you want to join?"/>
+
+                                </p:commandButton>
+
+<!--                                driver details button-->
+                                <p:commandButton id="viewDriverButton" value="Driver Details" icon="fas fa-eye" styleClass="rounded-button ui-button-secondary"
+                                                 oncomplete="PF('driverDetailsDlg1').show()"
+                                                 update=":driverDetailsForm1"
+                                                 disabled="#{empty rideController.selected}"/>
+                                &nbsp;
+
+                                <p:confirmDialog id="confirmDialogBox" global="true" showEffect="fade" hideEffect="fade"
+                                                 responsive="true" width="350">
+                                    <div align="center">
+                                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no"
+                                                  style="background-color: black !important; color: white!important;"      />
+                                        &nbsp;
+                                        <p:commandButton value="Yes" type="button"
+                                                         styleClass="ui-confirmdialog-yes ui-button-danger"
+                                                         style="background-color: black !important; color: white!important;"
+                                        />
+                                    </div>
+                                </p:confirmDialog>
+
+
+                                &nbsp;
+                                <p:commandButton id="viewButton" style="display: none" value="View Ride" icon="fas fa-eye"
+                                                 styleClass="rounded-button ui-button-secondary"
+                                                 disabled="#{empty rideController.selected}"/>
+
+<!--                                column toggler-->
+                                &nbsp;<p:commandButton id="toggler" type="button" value="Columns"
+                                                       styleClass="rounded-button ui-button-secondary"
+                                                       icon="pi pi-align-justify"/>
+                                <p:columnToggler datasource="datalist2" trigger="toggler"/>
+
+
+                                <p:button id="backButton" icon="fas fa-arrow-left"
+                                          styleClass="rounded-button ui-button-secondary"
+                                          outcome="/index.xhtml" value="Go Back" style="margin-left: 10px"/>
+
+
+                            </div>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+        </div>
+        <ui:include src="/driverAccount/driverModalAvailable.xhtml"/>
+    </ui:define>
+</ui:composition>
+</html>

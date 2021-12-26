@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pe="http://primefaces.org/ui">
+
+<ui:composition template="/template/siteTemplate.xhtml">
+    <ui:define name="title">
+        <h:outputText value="Driver Sign Up"/>
+    </ui:define>
+
+    <ui:define name="editableContent">
+        <div id="driverSignUpBody" style="width:100%">
+            <div class="driverSignUpHeading">
+                <h1>REGISTER DRIVER</h1>
+            </div>
+            <div class="driverSignUpForm">
+
+                <h:form id="formCreate">
+                    <h2 class="subClassHeader">Driver Details</h2>
+
+                    <p:panelGrid columns="4"
+                                 columnClasses="ui-g-12 ui-md-6 ui-lg-3, ui-g-12 ui-md-6  ui-lg-3, ui-g-12 ui-md-6  ui-lg-3, ui-g-12 ui-md-6  ui-lg-3">
+
+                        <p:outputLabel value="Name:" for="name"/>
+                        <p:inputText id="name" value="#{driverController.name}" style="width: 100%; margin-bottom: 20px"
+                                     required="true" requiredMessage="Name is required!">
+                            <f:validateLength minimum="2"/>
+                        </p:inputText>
+
+                        <p:outputLabel value="Email:" for="email"/>
+                        <p:inputText id="email" value="#{driverController.email}"
+                                     style="width: 100%; margin-bottom: 20px"
+                                     required="true" requiredMessage="Email address is required!">
+                            <f:validateLength minimum="2"/>
+                            <f:validator validatorId="emailValidator"/>
+                        </p:inputText>
+
+                        <p:outputLabel value="Gender:" for="dietLabel"/>
+                        <p:selectOneMenu id="dietLabel" value="#{driverController.gender}" required="true"
+                                         requiredMessage="Please Select a Gender!"
+                                         style="width:100%; margin-bottom: 20px">
+                            <p:ajax/>
+                            <f:selectItem itemLabel="Select Gender" itemValue="" noSelectionOption="true"/>
+                            <f:selectItem itemLabel="Male" itemValue="Male"/>
+                            <f:selectItem itemLabel="Female" itemValue="Female"/>
+                            <f:selectItem itemLabel="Other" itemValue="other"/>
+                        </p:selectOneMenu>
+
+
+
+                        <p:outputLabel value="Phone Number:" for="phoneNo"/>
+                        <p:inputMask id="phoneNo" mask="(999) 999-9999"
+                                     required="true" requiredMessage="Cell Phone Number is Required!"
+                                     value="#{driverController.phoneNo}"/>
+
+
+                        <p:outputLabel value="Your Interest:" for="interests"/>
+                        <p:inputText id="interests" value="#{driverController.interests}"
+                                     style="width: 100%; margin-bottom: 20px">
+                            <f:validateLength minimum="3"/>
+                        </p:inputText>
+
+                        <p:outputLabel value="Date of Birth:"/>
+
+                        <p:calendar id="basic" navigator="true" value="#{driverController.dateOfBirth}"
+                                    style="margin-bottom: 20px; " yearRange="1930:2022"
+                                    required="true" requiredMessage="DOB is required!"/>
+
+
+
+<!--                        security question-->
+                        <p:outputLabel value="Security Question:" for="securityQuestion"/>
+                        <p:selectOneMenu id="securityQuestion" value="#{driverController.securityQuestionNumber}">
+                            <!--
+                            List of security questions is displayed for the user to select one.
+                            The first security question is selected as the default.
+                            -->
+                            <f:selectItems value="#{driverController.security_questions}"/>
+                        </p:selectOneMenu>
+                        <br/>
+<!--                        security answer-->
+
+                        <p:outputLabel/>
+                        <p:outputLabel value="Security Answer:" for="securityAnswer"/>
+                        <p:inputText id="securityAnswer" value="#{driverController.answerToSecurityQuestion}"
+                                     style="width: 290px" required="true"
+                                     requiredMessage="Security Answer is required!">
+                            <f:validateLength minimum="2"/>
+                        </p:inputText>
+
+
+                    </p:panelGrid>
+
+
+                    <h2 class="subClassHeader">Car Details</h2>
+
+                    <p:panelGrid columns="4"
+                                 columnClasses="ui-g-12 ui-md-6 ui-lg-3, ui-g-12 ui-md-6 ui-lg-3, ui-g-12 ui-md-6 ui-lg-3, ui-g-12 ui-md-6 ui-lg-3">
+
+                        <p:outputLabel value="Make:" for="Make"/>
+                        <p:selectOneMenu id="Make" value="#{driverController.brand}"
+                                         style="width: 100%; margin-bottom: 20px" editable="true" filter="true"
+                                         filterMatchMode="startsWith">
+                            <f:selectItems value="#{driverController.listOfMakes}"/>
+                            <p:ajax update=":formCreate:modelnew"/>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="Model:" for="modelnew"/>
+                        <p:selectOneMenu id="modelnew" value="#{driverController.model}"
+                                         style="width: 100%; margin-bottom: 20px" editable="true">
+                            <f:selectItems value="#{driverController.getModelsForMake(driverController.brand)}"/>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="Type:" for="type"/>
+                        <p:selectOneMenu id="type" value="#{driverController.type}"
+                                         style="margin-bottom: 20px; width: 100%">
+                            <f:selectItem itemLabel="Select Type" itemValue="" noSelectionOption="true"/>
+                            <f:selectItem itemLabel="Hatchback" itemValue="0"/>
+                            <f:selectItem itemLabel="Sedan" itemValue="1"/>
+                            <f:selectItem itemLabel="SUV" itemValue="2"/>
+                        </p:selectOneMenu>
+
+
+                        <p:outputLabel value="Registration Number:" for="registrationNo"/>
+                        <p:inputText id="registrationNo" value="#{driverController.registrationNumber}"
+                                     style="width: 100%; margin-bottom: 20px"
+                                     required="true" requiredMessage="Registration Number is required!">
+                            <f:validateLength minimum="2"/>
+                        </p:inputText>
+
+                        <p:outputLabel value="Capacity:" for="capacity"/>
+                        <p:inputNumber id="capacity" value="#{driverController.capacity}"
+                                       required="true" requiredMessage="Capacity is required!"
+                                       style="width: 100%; margin-bottom: 20px">
+                        </p:inputNumber>
+
+
+                    </p:panelGrid>
+
+                    <br/><br/><br/>
+
+                    <p:panelGrid columns="4"
+                                 columnClasses="ui-g-12 ui-md-6 ui-lg-3, ui-g-12 ui-md-6 ui-lg-3, ui-g-12 ui-md-6 ui-lg-3, ui-g-12 ui-md-6 ui-lg-3">
+
+
+                        <p:outputLabel value="Password:" for="password"/>
+                        <p:password id="password" value="#{driverController.password}"
+                                    style="width: 100%; margin-bottom: 20px"
+                                    feedback="true" required="true" requiredMessage="Password is required!">
+                            <f:validator validatorId="passwordValidator"/>
+                        </p:password>
+
+                        <p:outputLabel value="Confirm Password:" for="confirmPassword"/>
+                        <p:password id="confirmPassword" value="#{driverController.confirmPassword}"
+                                    style="width: 100%; margin-bottom: 20px"
+                                    required="true" requiredMessage="Confirm Password is required!"/>
+
+                    </p:panelGrid>
+
+                    <div class="rideracntbtns">
+                        <p:commandButton value="Create" icon="fas fa-arrow-up"
+                                         styleClass="btn1 btn2 createBtn ui-button-outlined ui-button-secondary"
+                                         ajax="false" action="#{driverController.createAccount()}"/>
+                        &nbsp;&nbsp;
+
+                        <p:button id="cancelBtn" outcome="/index" value="Cancel" icon="fas fa-ban"
+                                  styleClass="btn1 ui-button-outlined ui-button-secondary"/>
+                    </div>
+                </h:form>
+                <br/><br/>
+
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>
+</html>

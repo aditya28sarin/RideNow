@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pe="http://primefaces.org/ui">
+<ui:composition id="footer">
+
+    <div class="p-col-12 p-md-12 p-lg-12 footerBox">
+<!--        Logo-->
+        <div class="imageBox">
+            <h:link outcome="/index">
+                <img src="#{resource['images:rideNowLogo.png']}"
+                     style="height:64px; width:auto; float:left; padding-left:10px; border:none;"
+                     alt="RideNow Logo"/>
+            </h:link>
+        </div>
+
+<!--        social media links-->
+        <div class="centerBox">
+            <div class="linkBox">
+                <a href="https://www.facebook.com/virginiatech" target="_blank">
+                    <i class="fab fa-facebook" /></a>&nbsp;&nbsp;
+                <a href="https://twitter.com/virginia_tech" target="_blank">
+                    <i class="fab fa-twitter" /></a>&nbsp;&nbsp;
+                <a href="https://www.linkedin.com/school/virginia-tech" target="_blank">
+                    <i class="fab fa-linkedin" /></a>&nbsp;&nbsp;
+                <a href="https://www.instagram.com/virginia.tech" target="_blank">
+                    <i class="fab fa-instagram" /></a>
+            </div>
+<!--            authors-->
+            <div class="attributionBox">
+                <p style="font-size: 0.8rem"><a href="https://manta.cs.vt.edu/cs5704/" target="_blank">CS5704 Software Engineering</a> course semester project application developed by <a href="https://vt.edu/" target="_blank">Mayur Dhepe</a>,
+                <a href="https://shantanudeore2.github.io/shantanudeore/" target="_blank">Shantanu Deore</a> and <a href="https://aditya28sarin.github.io/" target="_blank">Aditya Sarin</a></p>
+            </div>
+        </div>
+        <div class="menuBox" >
+<!--            menu-->
+            <h:form>
+                <p:button value="Metrics" type="button" outcome="/appMetrics/metrics" styleClass="ui-button-secondary ui-button-flat" style="font-size: 0.8rem" />
+                <p:commandButton value="Blogs" ajax="false" action="#{newsApiController.performSearch()}"  styleClass="ui-button-secondary ui-button-flat" style="font-size: 0.8rem" />
+                <p:button value="About Us" type="button" outcome="/template/AboutUs" styleClass="ui-button-secondary ui-button-flat" style="font-size: 0.8rem" />
+            </h:form>
+        </div>
+    </div>
+
+</ui:composition>
+</html>

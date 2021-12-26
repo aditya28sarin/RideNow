@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+    <h:form>
+        <div id="navBar">
+
+
+<!--            Logo-->
+                <div align="left"  style="width:154px;">
+
+                    <h:link outcome="/index">
+                        <img src="#{resource['images:rideNowLogo.png']}"
+                             id="imghead"
+                             alt="RideNow Logo"/>
+                    </h:link>
+                </div>
+
+<!--            top menu-->
+                    <div id="centerMenu">
+                        <div class="centerMenuItem" >
+                            <p:button value="Metrics"
+                                      type="button" outcome="/appMetrics/metrics" styleClass="ui-button-secondary ui-button-flat" />
+
+                        </div>
+                        <div class="centerMenuItem" >
+                            <p:commandButton value="Blogs" ajax="false" action="#{newsApiController.performSearch()}"
+                                             styleClass="ui-button-secondary ui-button-flat" />
+
+                        </div>
+                        <div class="centerMenuItem" >
+                            <p:button value="About Us"
+                                      type="button" outcome="/template/AboutUs" styleClass="ui-button-secondary ui-button-flat" />
+
+                        </div>
+
+
+
+
+                        <div class="centerMenuItem" >
+                            <p:commandButton id="fareChart" value="Pricing Model"
+                                             styleClass="ui-button-secondary ui-button-flat"
+                                             oncomplete="PF('FareEstimationChartDialog1').show()"/>
+                        </div>
+
+                    </div>
+
+
+                <div style="display: flex; flex-direction: row; justify-content: flex-end" id="rightHeaderbtn">
+                    <div class="card">
+
+<!--                        driver menu-->
+                        <div class="hiddenMenu">
+                            <c:if test="#{driverController.isLoggedIn() == true}">
+
+                                <p:button style="color: black; border: none; white-space: nowrap;" id="createRide"
+                                          value="Create a Ride"
+                                          type="button" outcome="/ride/create" icon="fa fa-car"/>
+
+                                <p:menuButton style="width: 12.5rem !important;" buttonStyleClass="nameBtn" id="menuBtnDri" value="#{driverController.selected.name}"  icon="fas fa-user" >
+                                    <p:menuitem value="My Profile" outcome="/driverAccount/profile"/>
+                                    <p:menuitem value="My Rides" outcome="/driverRides/listDriverRides"/>
+                                    <p:menuitem value="Sign Out" action="#{driverController.logout()}"
+                                                icon="fas fa-sign-out-alt"/>
+                                </p:menuButton>
+
+
+                            </c:if>
+
+
+<!--                            rider menu-->
+                        <c:if test="#{riderController.isLoggedIn() == true}">
+
+                            <p:button style="color: black; border: none; white-space: nowrap;" id="findRide"
+                                      value="Find a Ride"
+                                      type="button" outcome="/FindRides/FindAvailableRides" icon="fa fa-car"/>
+
+                            <p:menuButton style="width: 12.5rem !important;" id="menuBtnRid" value="#{riderController.selected.name}"  icon="fas fa-user" >
+                                <p:menuitem value="My Profile" outcome="/riderAccount/profile"/>
+                                <p:menuitem value="My Rides" outcome="/riderRidesHistory/listRiderRides"/>
+                                <p:menuitem value="Sign Out" action="#{riderController.logout()}"
+                                            icon="fas fa-sign-out-alt"/>
+                            </p:menuButton>
+                        </c:if>
+
+<!--                            global(public) menu-->
+                        <c:if test="#{driverController.isLoggedIn() == false and riderController.isLoggedIn() == false}">
+                            <p:menuButton style="width: 70%;" id="menuBtn" value="LOGIN" styleClass="ui-button" >
+                                <p:menuitem value="Sign Up / Login to Drive" outcome="/driverAccount/SignIn"/>
+                                <p:menuitem value="Sign Up / Login to Ride" outcome="/riderAccount/SignIn"/>
+                            </p:menuButton>
+                        </c:if>
+
+                        </div>
+                    </div>
+
+                </div>
+
+        </div>
+    </h:form>
+
+    <ui:include src="/ride/fareEstimationChartHeader.xhtml"/>
+</ui:composition>
+
+</html>

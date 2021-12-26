@@ -1,0 +1,1406 @@
+/*
+ * Created by Mayur Dhepe on 2021.10.10
+ * Copyright © 2021 Mayur Dhepe. All rights reserved.
+ */
+
+/*****************************************************
+*   Cascading Style Sheets (CSS) Style Definitions   *
+*   Created by Osman Balci for the Movies app.       *
+*****************************************************/
+
+.ui-panel .ui-panel-content{
+    background-color: #ffffff !important;
+}
+
+body .ui-datatable thead th{
+    background-color: black !important;
+    color: white !important;
+    text-align: center;
+}
+
+body .ui-panel .ui-panel-titlebar {
+     border: none !important;
+     background: white !important;
+     width: 50% !important;
+}
+
+body .ui-panel .ui-panel-content {
+     border: none !important;
+}
+
+body .ui-panel .ui-panel-title {
+    margin: 0;
+    font-size: 1.8rem;
+    color: black;
+    font-family: "Roboto Thin";
+    border: #212121 solid 4px;
+    padding: 0.3rem;
+    letter-spacing: 3px;
+}
+
+/*body .ui-panel {*/
+/*    padding: 0;*/
+/*    margin-top: -20rem;*/
+/*    width: 90%;*/
+/*}*/
+
+#RiderRidesListForm{
+        padding: 0;
+        margin-top: -35rem;
+        width: 90%;
+}
+
+body .ui-datatable .ui-datatable-footer{
+    background-color: white;
+    border: none;
+}
+
+.ui-dataview .ui-dataview-header .ui-dataview-layout-options {
+
+    display: none;
+}
+
+body .ui-dataview .ui-dataview-header {
+    background-color: black;
+    color: white;
+    width: 30%;
+    margin-left: 29rem;
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    font-family: "Roboto Thin";
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.ui-galleria-header {
+    background-color: black;
+    color: white;
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    font-family: "Roboto Thin";
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    width: 50%;
+}
+
+body .ui-rating .ui-rating-star-on a:before {
+    content: "\e936";
+    color: #FFBD4A;
+}
+
+.ui-widget-header .ui-inputfield, .ui-widget-content .ui-inputfield{
+
+    height: 1.5rem;
+}
+
+.ui-filter-column .ui-column-customfilter .custom-filter {
+    width: 50%;
+    box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    /*background: #f1f1f1;*/
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: lightgray;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+html, body {
+    background-color: white;
+    margin: 0 0 0 0; /* top right bottom left */
+    width: 100%; /* Set page width horizontally 100% */
+    height: 100%; /* Set page height vertically 100% */
+}
+
+body, p {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 12pt;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    color: black;
+}
+
+h1, title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12pt;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    color: maroon;
+}
+
+/*
+=======================================
+|   Site Template Component Styling   |
+=======================================
+*/
+
+/*
+Style the div component whose unique id is "page"
+<div id="page"> in siteTemplate
+*/
+#page {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 12pt;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+
+}
+
+/*
+Style the div component whose unique id is "header"
+<div id="header"> in siteTemplate
+*/
+#header {
+    background-color: azure;
+    width: 100%;
+    height: 84px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    margin-bottom: 16px;
+}
+
+/*
+Style the div component whose unique id is "editableContent"
+<div id="editableContent"> in siteTemplate
+*/
+#editableContent {
+    /* height = 100% window height - (header height 84px + footer height 100px) */
+    height: calc(100% - 184px);
+    width: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 100px;
+    margin-bottom: 16px;
+    /*height: 100vh;*/
+}
+
+/*
+Style the div component whose unique id is "footer"
+<div id="footer"> in siteTemplate
+*/
+#footer {
+    height: 100%;
+    width: 100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+}
+
+/*
+==========================
+|   Styling Hyperlinks   |
+==========================
+The <a> tag defines a hyperlink.
+Hyperlinks (or links) are styled differently depending on what state they are in:
+    a:link      - normal state (unvisited link)
+    a:visited   - visited state (link clicked on by user earlier)
+    a:hover     - mouse over state (link when the user hovers over it)
+    a:active    - active state (link currently clicked on by user)
+*/
+
+/* Set the font family for the standard HTML tag "a" for hyperlinks */
+a {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+}
+
+a:link {
+    text-decoration: none; /* Do not underline the link in normal state */
+}
+
+a:visited {
+    text-decoration: none; /* Do not underline the link in visited state */
+}
+
+a:hover {
+    text-decoration: underline; /* Underline the link in hover state */
+}
+
+a:active {
+    text-decoration: underline; /* Underline the link in active state */
+}
+
+/*
+==============================
+|   Main Style Definitions   |
+==============================
+*/
+
+/* Used in headerTemplate */
+.headerTitle {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 18pt;
+    font-style: italic;
+    font-weight: normal;
+    text-decoration: none;
+    color: mediumblue;
+}
+
+/*
+Proportionately scale image to show on mobile devices and smaller browser windows.
+Scale the image downward, but do not enlarge it beyond its actual width size.
+*/
+.scalableImage {
+    max-width: 100%;
+    height: auto;
+    border: none;
+}
+
+/* Style p:panelGrid Column 1 */
+.panelGridColumn1, .panelGridColumn2, .panelGridColumn3, .panelGridColumn4, .panelGridColumn5, .panelGridColumn6 {
+    text-align: left;
+    white-space: nowrap; /* Disallow line break */
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    background-color: white !important;
+    border: none !important;
+    width: 60%;
+}
+
+body .ui-accordion .ui-accordion-header {
+    margin-top: 0.5rem;
+    margin-right: 0.5rem;
+}
+body .ui-accordion .ui-accordion-header.ui-state-active {
+    border-color: black;
+    background: black;
+    color: white;
+}
+
+body .ui-accordion .ui-accordion-header.ui-state-active:hover {
+    border-color: black;
+    background: black;
+    color: white;
+}
+
+
+
+body .ui-accordion .ui-accordion-header {
+    border: 1px solid #dee2e6;
+    border-top: 0 none;
+    background: black;
+    color: white;
+    padding: 1rem;
+    font-weight: 700;
+    margin-top: 0;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    user-select: none;
+    border-radius: 0;
+    position: relative;
+    outline: 0 none;
+}
+
+/*Driver SignIn */
+.ui-g-8, .ui-md-6, .ui-lg-3, .ui-lg-2 {
+    text-align: left;
+    white-space: nowrap; /* Disallow line break */
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    background-color: white !important;
+    border: none !important;
+}
+
+.ui-g-8 {
+    margin-left: 2rem;
+}
+
+.ui-lg-2 {
+    /*margin-left: 6rem !important;*/
+}
+
+
+
+.driverSignInHeading > h1 {
+    font-size: 2rem;
+    font-family: "Century Gothic";
+    color: black;
+    font-weight: bolder;
+    margin-left: 4rem;
+}
+
+.loginButtonsDiv{
+    margin-left: 4rem;
+}
+
+
+/* Used to color panel backgrounds */
+.ui-panel-content {
+    background-color: oldlace !important;
+}
+
+/*
+======================================
+|   App Specific Style Definitions   |
+======================================
+*/
+
+/* Used to Style Actor Names */
+.actorName {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    color: maroon;
+}
+
+/* Used to Style Character Names */
+.characterName {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 10pt;
+    font-style: italic;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+/*
+--------------------------------------------------
+Styles for the dialogs in movieSearch/MovieDetails
+and moviesNowPlaying/MovieDetails
+--------------------------------------------------
+*/
+.columnMoviePoster {
+    width: 100px;
+}
+
+.columnMiddlePart {
+    width: 75%;
+}
+
+.columnInfoButton {
+    width: 10%;
+}
+
+.ratingNumber {
+    vertical-align: middle;
+    height: 100%;
+}
+
+.dialogPoster {
+    width: 50%;
+}
+
+.dialogText {
+    width: 50%;
+}
+
+.selectedMovieTitle {
+    font-size: 20px;
+}
+
+.ratingColumn1 {
+    width: 45%;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.ratingColumn2 {
+    width: 45%;
+}
+
+.ratingColumn3 {
+    width: 10%;
+}
+
+.alignLeft {
+    float: left;
+}
+
+.alignRight {
+    float: right;
+}
+
+/* 
+------------------------------------------
+Styles for Responsive YouTube Video Player
+------------------------------------------
+We use the 9/16 (=56.25) ratio to play YouTube Videos.
+The padding-top applies the ratio of 56.25% to make sure
+that the width and height preserve the 9/16 ratio.
+Resizing the window of the player resizes the video player.
+*/
+
+.responsive-container {
+    position: relative;
+    overflow: hidden;
+    padding-top: 56.25%;
+}
+
+.responsive-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/*
+=========================================
+|   Skinning PrimeFaces UI Components   |
+=========================================
+*/
+
+/* Skinning PrimeFaces Galleria Image Slider */
+.ui-galleria-caption {
+    position: absolute;
+    left: 0 !important;
+    background-color: rgba(240, 255, 255, 0.8) !important;
+    padding: 0 !important;
+}
+
+/* PrimeFaces dataTable Row Paddings */
+.ui-datatable-data td {
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+}
+
+.faresTable {
+    width: 80%;
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 2px 2px 0 3px darkgray;
+    border: 2px solid black;
+}
+
+
+td{
+    text-align: center;
+}
+
+
+#navBar {
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ui-button {
+    background: white !important;
+    margin-right: 1rem !important;
+    /*height: 2rem !important;*/
+}
+
+#centerMenu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 40%;
+    align-items: center;
+}
+#imghead{
+
+
+    height:64px; width:auto; float:left; padding-left:10px; border:none;
+}
+.centerMenuItem {
+    color: white;
+    font-family: "Roboto Light";
+    letter-spacing: 2px;
+    margin-bottom: 0.2rem;
+}
+
+.centerMenuItem > a {
+    color: white;
+    text-underline: none;
+}
+
+.descApiContainer {
+    /*width: 10px; !important;*/
+    /*height: 6rem;*/
+    /*text-wrap: normal; !important;*/
+    overflow-x: hidden;
+    width: 20px;
+}
+
+
+/*.ui-button{*/
+/*    font-size: 1rem !important;*/
+/*    padding: 0.2rem !important;*/
+/*}*/
+
+.ui-panelgrid.showcase-text-align-center .ui-grid-responsive .ui-panelgrid-cell {
+    text-align: center;
+}
+
+.customPanelGrid .ui-panelgrid-content {
+    align-items: center;
+}
+
+.outerContainer {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    width: 100%;
+}
+
+.leftSection {
+    height: 100%;
+    width: 100%;
+    /*background-color: black;*/
+}
+
+
+#page {
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*justify-content: space-between;*/
+    /*min-height: 100%;*/
+}
+
+.test-class {
+    background-color: black;
+    color: black;
+
+}
+
+
+.footerBox {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.imageBox {
+    align-self: center;
+
+}
+
+.centerBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.linkBox{
+    margin-top: 0.2rem;
+}
+
+.linkBox > a {
+    color: white;
+    /*height: 2rem;*/
+    /*size: 2rem;*/
+    font-size: 1rem;
+    margin: 1.0rem;
+}
+
+
+.attributionBox {
+    color: white;
+    height: 1.1rem;
+    margin-bottom: 0.2rem;
+}
+
+.attributionBox > p{
+    font-family: "Roboto Thin";
+    color: white;
+}
+
+a{
+    color: white;
+}
+
+.attributionBox > a {
+    color: white;
+    font-family: "Roboto Light";
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+
+}
+
+
+.menuBox {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    height: 80%;
+    justify-content: space-between;
+}
+
+.menuBox > div {
+    font-family: "Roboto Light";
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+}
+
+/*Rider SignUp Page*/
+
+#riderSignUpBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    padding-left: 45%;
+}
+
+.riderSignUpHeading > h1 {
+    font-size: 2rem;
+    font-family: "Century Gothic";
+    color: black;
+    font-weight: bolder;
+    letter-spacing: 4px;
+}
+
+
+.riderSignUpForm {
+    margin-top: 4rem;
+
+}
+
+/*Driver SignUp Page*/
+
+
+#driverSignUpBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+
+}
+
+.riderBody {
+    margin-left: 20%;
+
+}
+
+.ui-panelmenu {
+    background-color: black;
+!important;
+    color: white !important;
+}
+
+.driverSignUpHeading {
+    width: 25rem;
+    text-align: center;
+}
+
+.driverSignUpHeading > h1 {
+    font-size: 2rem;
+    font-family: "Century Gothic";
+    color: black;
+    font-weight: bolder;
+}
+
+
+.createBtn {
+    margin-left: 25rem !important;
+}
+
+
+.driverSignUpForm {
+    margin-top: 4rem;
+
+
+}
+
+/*Ride Create Page*/
+
+#rideCreateBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    width: 55%;
+}
+
+
+.rideCreateHeading > h1 {
+    font-size: 2rem;
+    font-family: "Century Gothic";
+    color: black;
+    font-weight: bolder;
+}
+
+.rideFindHeader > h1 {
+   font-size: 2rem;
+   font-family: "Century Gothic";
+   color: black;
+   font-weight: bolder;
+}
+
+.rideCreateForm {
+    margin-left: 15%;
+    margin-bottom: 2rem;
+}
+
+body .ui-button {
+    color: black;
+    border: none;
+}
+
+
+body .ui-button:hover {
+    color: black;
+
+}
+
+.leftSide {
+    display: flex;
+    flex-direction: column;
+    /*height: 80vh;*/
+    justify-content: flex-start;
+    margin-top: 6rem;
+    align-items: center;
+}
+
+.leftSide > img {
+    border-radius: 50%;
+}
+
+
+.subClassHeader {
+    font-size: 2rem;
+    font-family: "Century Gothic";
+    color: black;
+    font-weight: bolder;
+}
+
+.carForm {
+    margin-left: 2rem;
+}
+
+
+#homePageHeading {
+    font-family: "Roboto Thin";
+    font-style: italic;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+}
+
+.homePageSubHeading {
+    font-family: "Roboto Thin";
+    font-style: italic;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+}
+
+.timelineView {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    justify-content: space-between;
+}
+
+.timelinecard {
+    width: 40%;
+    height: 20%;
+}
+
+
+hr {
+    width: 10%;
+    border-bottom: #555555 1px solid;
+}
+
+
+.homeTop {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.homeTopText {
+    font-size: 3rem;
+    font-family: Calibri;
+    letter-spacing: 5px;
+    color: black;
+}
+
+.homeTopImg {
+    width: 50%;
+    height: 40%;
+}
+
+.wid {
+    width: 150px !important;
+}
+
+.ui-button-secondary {
+    background-color: black !important;
+    color: white !important;
+}
+
+
+.aboutuscontainer {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: auto;
+    height: 70%;
+}
+
+.aboutustitle {
+    font-size: 2rem;
+    font-family: "Calibri";
+    color: black;
+    letter-spacing: 5px;
+    line-height: 1px;
+}
+
+.aboutustxt {
+    font-size: 1.1rem;
+    font-family: "Calibri Light";
+    color: black;
+    /*font-style: italic;*/
+    letter-spacing: 4px;
+    line-height: 30px;
+}
+
+
+/*Profile Page*/
+.profilePage {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    grid-column-gap: 10%;
+}
+
+.leftSide .profilePhoto {
+    margin-top: -5rem;
+    border: 3px solid #555555;
+
+}
+
+.profilePhoto {
+    width: 300px;
+    height: 250px;
+}
+
+.uploadbtn {
+    background-color: black;
+    padding: 0.6rem;
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    font-family: "Roboto Thin";
+    color: white;
+    margin-top: 0.8rem;
+    border: 1px solid darkgray;
+    border-radius: 6px;
+    box-shadow: darkgray;
+}
+
+.profileFields {
+    width: 70%;
+}
+
+.profileData {
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    border: 1px solid #555555;
+    box-shadow: -1px 1px #555555,
+    2px 2px #555555,
+    -3px 3px #555555,
+    -4px 4px #555555,
+    -5px 5px #555555;
+    padding-left: 1rem;
+}
+
+.singleProfileData {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+}
+
+.profileipfield {
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    font-family: "Roboto Thin";
+    font-weight: 700;
+}
+
+.profileopfield {
+    font-size: 1.0rem;
+    letter-spacing: 4px;
+    font-family: Arial;
+    color: #1F1D36;
+}
+
+
+.profileDataRow {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.riderProfileHeading > h1 {
+    font-size: 2rem;
+    font-family: "Century Gothic";
+    color: white;
+    font-weight: bolder;
+    letter-spacing: 4px;
+}
+.ui-datatable-data td {
+     padding-top: 6px !important;
+     padding-bottom: 6px !important;
+}
+
+.ui-widget-header .ui-inputfield, .ui-widget-content .ui-inputfield {
+ height: 100%;
+}
+
+.riderProfileHeading {
+    background-color: black;
+    width: 55%;
+    text-align: center;
+    /*padding-left: 15px;*/
+    border-radius: 5px;
+}
+
+.hiddenMenu {
+    display: flex;
+    flex-direction: row;
+    margin-left: 1rem;
+}
+
+
+/*Metrics Page*/
+
+.metricsbtn{
+    background-color: black !important;
+    color: white !important;
+    padding:0.2rem 0 0.2rem 0.5rem!important;
+    border-radius: 35px !important;
+}
+
+
+/*Rider Rides Page*/
+.cancelBtnRiderRides{
+    background-color: #212121 !important;
+    color: white !important;
+}
+
+body .ui-button.rounded-button{
+    margin-top: 1.5rem;
+    height: 40px !important;
+}
+
+.ratingClass {
+    font-size: 0.9rem;
+    font-family: 'Segoe UI';
+
+    font-weight: lighter;
+    margin-right: 0.6rem;
+    background-color: black;
+    border-radius: 20px;
+    padding:0.7rem 0.9rem;
+}
+
+
+.fadeRating{
+    background-color: black !important;
+    opacity: 0.6;
+}
+
+.visibleRating{
+    background-color: black !important;
+    opacity: 1;
+}
+
+
+/*API blogs Page*/
+.linkBtnApi{
+    background-color: black;
+    padding:1rem;
+    border-radius: 15px;
+    letter-spacing: 2px;
+    font-family: "Roboto Thin";
+    font-size: 0.9rem;
+    /*width: 28%;*/
+    /*display: flex;*/
+    /*flex-direction: row;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/
+}
+
+.linkBtnApi > a{
+    color: white;
+}
+
+
+.linkBtnApi:hover{
+    box-shadow: 0 1px 20px #999;
+    text-underline: none;
+}
+
+#rightHeaderbtn{
+    width:500px;
+}
+
+/*Ride Details Page*/
+
+.rideDetailip{
+    font-size: 1.1rem;
+    font-family: Calibri;
+    letter-spacing: 2px;
+    padding: 0.5rem;
+    box-shadow: 1px 1px 1px 1px darkgray;
+    background-color: white;
+    color: black;
+
+}
+
+.rideDetailop{
+    font-size: 1.1rem;
+    font-family: Calibri;
+    letter-spacing: 2px;
+    padding: 0.5rem;
+    box-shadow: 1px 1px 1px 1px lightgray;
+    background-color: black;
+    color: white;
+}
+
+
+body .ui-galleria .ui-galleria-caption-item {
+    background: black;
+    color: #f8f9fa;
+    padding: 1rem;
+}
+
+/*
+**********MEDIA QUERIES***************
+320px—480px: Mobile devices
+481px—768px: iPads, Tablets
+769px—1024px: Small screens, laptops
+1025px—1200px: Desktops, large screens
+1201px and more— Extra large screens, TV
+*/
+
+/*Extra Large Screens*/
+@media only screen and (max-width: 2000px) {
+    .rideracntbtns .btn1 {
+        margin-left: -15rem;
+    }
+
+    .mobileTimeline {
+        display: none !important;
+    }
+
+
+    .homeTopImg {
+        width: 60%;
+    }
+
+
+    .rideCreateHeading{
+        margin-left: 30rem;
+    }
+
+
+}
+
+/* Small Screens(Ipad Pro etc..) and Laptops, Large Screen Laptops */
+@media only screen and (max-width: 1200px) {
+    .rideracntbtns .btn1 {
+        margin-left: -15rem;
+    }
+
+    .mobileTimeline {
+        display: none !important;
+    }
+
+    .homeImg {
+        width: 75%;
+    !important;
+    }
+
+    .homeTopText {
+        font-size: 1.5rem;
+    }
+
+
+    .cardEach {
+        height: 90%;
+        width: 160%;
+    }
+
+    .rideracntbtns {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .signinFields {
+        margin-left: 10%;
+    }
+
+    #imghead{
+
+
+        height:40px; width:auto; float:left; padding-left:10px; border:none;
+    }
+
+}
+
+/* Small Ipads and Tablets*/
+@media only screen and (max-width: 768px) {
+
+    .mobileTimeline {
+        display: block !important;
+    }
+
+    /*center header menu*/
+    #centerMenu {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 80%;
+        margin-left: 10%;
+    }
+
+
+    #driverSignUpBody {
+        align-items: center;
+        width: 100%;
+        padding-left: 0;
+    }
+
+    #rideCreateBody {
+        align-items: center;
+        width: 100%;
+    }
+
+    #riderSignUpBody {
+        align-items: center;
+        width: 100%;
+    }
+
+
+    .leftSide {
+        margin-top: 0rem;
+    }
+
+    .profileFields {
+        margin: 0 auto 0 auto;
+    }
+
+    .riderSignUpHeading {
+        text-align: center;
+    }
+
+    #driverSignUpBody {
+        margin: 0 auto 0 auto;
+    }
+
+    .createBtn {
+        margin-left: 3rem !important;
+    }
+
+
+    .footerBox {
+        /*height:100%;*/
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+
+    .menuBox {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        width: 80%;
+        justify-content: space-around;
+        margin: 2rem 0;
+    }
+
+    .attributionBox {
+        margin: 1rem 0;
+        text-align: center;
+    }
+
+    .linkBox {
+        margin: 1rem 0;
+    }
+
+    .loginButtonsDiv {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .loginButtonsDiv .rounded-button {
+        width: 50%;
+
+    }
+
+    .loginButtonsDiv .ui-button-outlined {
+        width: 50%;
+    }
+
+    .loginButtonsDiv .riderloginsigninbtn {
+        margin-bottom: 1rem;
+    }
+
+    .subClassHeader {
+        margin-left: 1rem;
+    }
+
+    .rideracntbtns {
+        display: flex;
+        flex-direction: row;
+        /*padding-right: 50px !important;*/
+        margin-left: 40%;
+    }
+
+    .homeTopText {
+        margin-right: 1rem;
+        font-size: 1.8rem !important;
+        text-align: center;
+        letter-spacing: 5px;
+        width: 80%;
+        line-height: 40px;
+    }
+
+    .homeTopImg {
+        display: none;
+    }
+
+    .timelineView {
+        display: none !important;
+    }
+
+    .verticalLine {
+        border-left: 2px solid black;
+        height: 35px;
+        margin-left: 50%;
+        margin-top: 15px;
+    }
+
+    .mobileCardHeader {
+        font-size: 1.1rem;
+        letter-spacing: 3px;
+        font-family: "Arial";
+        margin-top: 3px;
+        font-weight: 700;
+    }
+
+    .mobileCardInfo {
+        width: 60%;
+        text-align: center;
+        letter-spacing: 3px;
+        line-height: 25px;
+        margin: 2px 0;
+    }
+
+    .mobileCardStepNo {
+        color: darkgray;
+        letter-spacing: 4px;
+    }
+
+    .aboutustitle {
+        line-height: 40px;
+    }
+
+    #navBar {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #centerMenu {
+        display: flex;
+        flex-direction: column;
+        margin-left: 0;
+    }
+
+
+    #rightHeaderbtn {
+        margin-bottom: 1rem;
+    }
+
+}
+
+/*mobile devices*/
+@media only screen and (max-width: 480px) {
+    .rideracntbtns {
+        display: flex;
+        flex-direction: row;
+        /*padding-right: 50px !important;*/
+        margin-left: 33%;
+
+    }
+
+    .rideracntbtns .btn1 {
+        font-size: 17px;
+    }
+
+    .signinFields {
+        margin-left: 0;
+    }
+
+    .rideCreateHeading{
+        margin-left: -3rem;
+    }
+
+    #rightHeaderbtn{
+        width:300px;
+    }
+
+}
+
+.scrollableTextBox {
+    display: block;
+    width: 100%;
+    height: 45px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    white-space: normal;
+    overflow-wrap: break-word;
+    text-align: center;
+}
+
+.scrollableTextBox:hover {
+    display: block;
+    width: 100%;
+    height: 45px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    white-space: normal;
+    overflow-wrap: break-word;
+    text-align: center;
+}
+
+
+
+
+

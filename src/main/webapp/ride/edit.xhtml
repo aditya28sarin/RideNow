@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pe="http://primefaces.org/ui">
+
+<ui:composition template="/template/siteTemplate.xhtml">
+    <ui:define name="title">
+        <h:outputText value="Edit Ride"/>
+    </ui:define>
+    <ui:define name="editableContent">
+        <div id="rideCreateBody" align="center" style="width:80%; margin:0 auto;">
+            <div class="rideCreateHeading">
+                <h1>Edit Ride</h1>
+            </div>
+            <div class="rideCreateForm">
+
+
+                <h:form>
+                <div class="p-d-none p-d-lg-block">
+                    <p:panelGrid columns="4" columnClasses="panelGridColumn1, panelGridColumn2, panelGridColumn3, panelGridColumn4">
+
+
+                    <p:outputLabel value="Start location:" for="startLocation"/>
+                    <p:inputText id="startLocation" value="#{driverRidesController.selected.startLocation.landmarkName}" style="width: 290px; margin-bottom: 20px"
+                                 required="true" requiredMessage="Start Location is required">
+                    </p:inputText>
+
+
+                    <p:outputLabel value="End location:" for="endLocation"/>
+                    <p:inputText id="endLocation" value="#{driverRidesController.selected.destinationLocation.landmarkName}" style="width: 290px;  margin-bottom: 20px"
+                                 required="true" requiredMessage="End Location is required">
+                    </p:inputText>
+
+                    <p:outputLabel value="Start Time:" for="startTime"/>
+                    <p:calendar id="startTime" value="#{driverRidesController.selected.startTime}" pattern="MM/dd/yyyy HH:mm" style=" margin-bottom: 20px"
+                                required="true" requiredMessage="Start Time is required"/>
+                </p:panelGrid>
+                    <br /><br />
+
+                    <p:commandButton id="createAccount" value="Edit" icon="fas fa-arrow-up"
+                                     styleClass="ui-button-outlined ui-button-secondary"
+                                     ajax="false" action="#{driverRidesController.createRide()}"/>
+                    &nbsp;&nbsp;
+
+                    <p:button outcome="/index" value="Cancel" icon="fas fa-ban" styleClass="ui-button-outlined ui-button-secondary"/>
+
+                </div>
+                </h:form>
+
+                <h:form id="MobRideCreateForm" class="ui-datatable-data">
+                <div class="p-d-lg-none">
+                    <p:panelGrid columns="1" columnClasses="panelGridColumn1">
+
+
+
+                        <p:outputLabel value="Start location:" for="MobstartLocation"/>
+                        <p:inputText id="MobstartLocation" value="#{rideController.startLocationString}" style="width: 290px; margin-bottom: 20px">
+                            <f:validateLength minimum="2"/>
+                        </p:inputText>
+
+
+                        <p:outputLabel value="End location:" for="MobendLocation"/>
+                        <p:inputText id="MobendLocation" value="#{rideController.endLocationString}" style="width: 290px;  margin-bottom: 20px">
+                            <f:validateLength minimum="2"/>
+                        </p:inputText>
+
+                        <p:outputLabel value="Start Time:" for="MobstartTime"/>
+                        <p:calendar id="MobstartTime" value="#{rideController.startTime}" pattern="MM/dd/yyyy HH:mm" style=" margin-bottom: 20px"/>
+                    </p:panelGrid>
+
+                    <p:commandButton id="MobcreateAccount" value="Create" icon="fas fa-arrow-up"
+                                     styleClass="ui-button-outlined ui-button-secondary"
+                                     ajax="false" action="#{rideController.createRide()}"/>
+                    &nbsp;&nbsp;
+
+                    <p:button outcome="/index" value="Cancel" icon="fas fa-ban" styleClass="ui-button-outlined ui-button-secondary"/>
+
+                </div>
+
+                </h:form>
+
+                    <br/><br/>
+
+
+
+            </div>
+        </div>
+    </ui:define>
+    <!--    </p:dialog>-->
+</ui:composition>
+</html>

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+<ui:composition template="/template/siteTemplate.xhtml">
+    <ui:define name="title">
+        <h:outputText value="Your Profile"/>
+    </ui:define>
+    <ui:define name="editableContent">
+
+        <c:if test="#{riderController.isLoggedIn() == false}">
+            #{riderController.notLoggedIn()}
+        </c:if>
+
+        <h:form>
+            <div class="profilePage" style="width: 100%; min-height: 100vh;">
+                <div class="leftSide">
+
+
+                    <p:card style="width: 22em">
+                        <f:facet name="header">
+                            <p:graphicImage cache="false" styleClass="profilePhoto" value="#{riderController.riderPhoto()}"/>
+                        </f:facet>
+
+                        <f:facet name="title">
+                            <div align="center"><h1 style="font-size: 1.1rem; letter-spacing: 3px; color: black">#{riderController.selected.name}</h1></div>
+                        </f:facet>
+
+                        <f:facet name="footer">
+                            <h:link outcome="/riderPhoto/ChangePhoto">
+                                <div class="uploadbtn"><i class="fas fa-camera"/>&nbsp;Change Photo</div>
+                            </h:link>
+
+                            <h:link outcome="/riderAccount/edit">
+                                <div class="uploadbtn"><i class="fas fa-edit" />&nbsp;Edit Profile</div>
+                            </h:link>
+
+                            <h:link outcome="/userPasswordChange/EnterEmail">
+                                <div class="uploadbtn"><i class="fas fa-key"/>&nbsp;Change Password</div>
+                            </h:link>
+                        </f:facet>
+                    </p:card>
+
+                </div>
+                <div class="profileFields">
+                    <div class="riderProfileHeading">
+                        <h1>#{riderController.selected.name}</h1>
+                    </div>
+
+                    <div>
+                        <c:if test="#{riderController.isLoggedIn() == true}">
+
+                            <p:accordionPanel widgetVar="basic">
+                                <p:tab title="Personal Details">
+                                    <div class="profileDataRow">
+                                        <div class="singleProfileData">
+                                            <p class="profileipfield">Name</p>
+                                            <p:divider align="left" style="width: 30%; font-size: 50%; margin-top: -1rem">
+                                                <div class="p-d-inline-flex p-ai-center">
+                                                    <i class="pi pi-circle-on" style="font-size: 5px"/>
+                                                </div>
+                                            </p:divider>
+                                            <p class="profileopfield"
+                                               style="margin-top: -0.5rem">#{riderController.selected.name}</p>
+                                        </div>
+
+                                        <div class="singleProfileData">
+                                            <p class="profileipfield">Phone Number</p>
+                                            <p:divider align="left" style="width: 30%; font-size: 50%; margin-top: -1rem">
+                                                <div class="p-d-inline-flex p-ai-center">
+                                                    <i class="pi pi-circle-on" style="font-size: 5px"/>
+                                                </div>
+                                            </p:divider>
+                                            <p class="profileopfield"
+                                               style="margin-top: -0.5rem">#{riderController.selected.phoneNo}</p>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="profileDataRow">
+                                        <div class="singleProfileData">
+                                            <p class="profileipfield">Date of Birth</p>
+                                            <p:divider align="left" style="width: 30%; font-size: 50%; margin-top: -1rem">
+                                                <div class="p-d-inline-flex p-ai-center">
+                                                    <i class="pi pi-circle-on" style="font-size: 5px"/>
+                                                </div>
+                                            </p:divider>
+                                            <p class="profileopfield"
+                                               style="margin-top: -0.5rem">#{riderController.selected.dateOfBirth}</p>
+                                        </div>
+
+
+
+                                        <div class="singleProfileData">
+                                            <p class="profileipfield">Gender</p>
+                                            <p:divider align="left" style="width: 30%; font-size: 50%; margin-top: -1rem">
+                                                <div class="p-d-inline-flex p-ai-center">
+                                                    <i class="pi pi-circle-on" style="font-size: 5px"/>
+                                                </div>
+                                            </p:divider>
+                                            <p class="profileopfield"
+                                               style="margin-top: -0.5rem">#{riderController.selected.gender}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="profileDataRow">
+
+                                        <div class="singleProfileData">
+                                            <p class="profileipfield">Interests</p>
+                                            <p:divider align="left" style="width: 30%; font-size: 50%; margin-top: -1rem">
+                                                <div class="p-d-inline-flex p-ai-center">
+                                                    <i class="pi pi-circle-on" style="font-size: 5px"/>
+                                                </div>
+                                            </p:divider>
+                                            <p class="profileopfield"
+                                               style="margin-top: -0.5rem">#{riderController.selected.interest}</p>
+                                        </div>
+
+
+                                        <div class="singleProfileData">
+                                            <p class="profileipfield">Email</p>
+                                            <p:divider align="left" style="width: 30%; font-size: 50%; margin-top: -1rem">
+                                                <div class="p-d-inline-flex p-ai-center">
+                                                    <i class="pi pi-circle-on" style="font-size: 5px"/>
+                                                </div>
+                                            </p:divider>
+                                            <p class="profileopfield"
+                                               style="margin-top: -0.5rem">#{riderController.selected.email}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="profileDataRow">
+                                        <div class="singleProfileData">
+                                            <p class="profileipfield">Total Spendings</p>
+                                            <p:divider align="left" style="width: 30%; font-size: 50%; margin-top: -1rem">
+                                                <div class="p-d-inline-flex p-ai-center">
+                                                    <i class="pi pi-circle-on" style="font-size: 5px"/>
+                                                </div>
+                                            </p:divider>
+                                            <p class="profileopfield"
+                                               style="margin-top: -0.5rem">$ #{riderController.selected.totalSpend}</p>
+                                        </div>
+                                        <div class="singleProfileData">
+                                            <p class="profileipfield">Number of Trips</p>
+                                            <p:divider align="left" style="width: 40%; font-size: 50%; margin-top: -1rem">
+                                                <div class="p-d-inline-flex p-ai-center">
+                                                    <i class="pi pi-circle-on" style="font-size: 5px"/>
+                                                </div>
+                                            </p:divider>
+                                            <p class="profileopfield"
+                                               style="margin-top: -0.5rem">#{riderController.selected.numberOfTrips}</p>
+                                        </div>
+                                    </div>
+
+
+                                </p:tab>
+
+                            </p:accordionPanel>
+
+
+                        </c:if>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+
+    </ui:define>
+</ui:composition>
+</html>

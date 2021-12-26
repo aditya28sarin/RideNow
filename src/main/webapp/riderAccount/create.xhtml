@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pe="http://primefaces.org/ui">
+
+<ui:composition template="/template/siteTemplate.xhtml">
+    <ui:define name="title">
+        <!-- Set the page title -->
+        <h:outputText value="Rider Sign Up"/>
+    </ui:define>
+
+<!-- Rider Create Form -->
+    <ui:define name="editableContent">
+        <div class="riderBody" id="driverSignUpBody" style="width:50%;">
+            <div class="driverSignUpHeading">
+                <h1>REGISTER RIDER</h1>
+            </div>
+
+            <div class="driverSignUpForm">
+
+                <h:form id="DriverCreateForm" class="ui-datatable-data">
+
+
+                    <p:panelGrid columns="4"
+                                 columnClasses="ui-g-12 ui-md-6 ui-lg-3, ui-g-12 ui-md-6 ui-lg-3, ui-g-12 ui-md-6 ui-lg-3, ui-g-12 ui-md-6 ui-lg-3">
+
+                        <p:outputLabel value="Name:" for="name"/>
+                        <p:inputText id="name" value="#{riderController.name}" style="width: 100%; margin-bottom: 20px"
+                                     required="true" requiredMessage="Name is required!">
+                            <f:validateLength minimum="2"/>
+                        </p:inputText>
+
+                        <p:outputLabel value="Email:" for="email"/>
+                        <p:inputText id="email" value="#{riderController.email}"
+                                     style="width: 100%; margin-bottom: 20px"
+                                     required="true" requiredMessage="Email address is required!">
+                            <f:validateLength minimum="2"/>
+                            <f:validator validatorId="emailValidator"/>
+                        </p:inputText>
+
+
+                        <p:outputLabel for="carrier" value="Cell Phone Carrier" class="standardText"/>
+                        <p:selectOneMenu id="carrier" value="#{riderController.cellPhoneCarrier}"
+                                         required="true" requiredMessage="Please Select a Carrier!">
+                            <f:selectItem itemLabel="Select a Carrier" itemValue="" noSelectionOption="true"/>
+                            <f:selectItem itemLabel="AT&amp;T" itemValue="mms.att.net"/>
+                            <f:selectItem itemLabel="Sprint" itemValue="pm.sprint.com"/>
+                            <f:selectItem itemLabel="T-Mobile" itemValue="tmomail.net"/>
+                            <f:selectItem itemLabel="Verizon" itemValue="vzwpix.com"/>
+                            <f:selectItem itemLabel="Virgin Mobile" itemValue="vmpix.com"/>
+                        </p:selectOneMenu>
+
+
+                        <p:outputLabel value="Phone Number:" for="phoneNo"/>
+                        <p:inputMask id="phoneNo" mask="(999) 999-9999"
+                                     required="true" requiredMessage="Cell Phone Number is Required!"
+                                     value="#{riderController.phoneNo}"/>
+
+
+                        <p:outputLabel/>
+                        <p:outputLabel/>
+                        <p:outputLabel/>
+                        <p:outputLabel/>
+
+
+                        <p:outputLabel value="Your Interest:" for="interests"/>
+                        <p:inputText id="interests" value="#{riderController.interests}"
+                                     style="width: 100%;  margin-bottom: 20px">
+                            <f:validateLength minimum="2"/>
+                        </p:inputText>
+
+                        <p:outputLabel value="Date of Birth:"/>
+                        <p:calendar id="basic" navigator="true" value="#{riderController.dateOfBirth}"
+                                    style=" margin-bottom: 20px" yearRange="1930:2022"
+                                    required="true" requiredMessage="DOB is required!"/>
+
+
+                        <p:outputLabel value="Gender:"/>
+                        <p:selectOneMenu id="dietLabel" value="#{riderController.gender}" required="true"
+                                         requiredMessage="Please Select a Gender!"
+                                         style="width:200px;  margin-bottom: 20px">
+                            <p:ajax/>
+                            <f:selectItem itemLabel="Select Gender" itemValue="" noSelectionOption="true"/>
+                            <f:selectItem itemLabel="Male" itemValue="Male"/>
+                            <f:selectItem itemLabel="Female" itemValue="Female"/>
+                            <f:selectItem itemLabel="Other" itemValue="other"/>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel/>
+                        <p:outputLabel/>
+
+                        <!--
+                             SECURITY QUESTION
+                      -->
+                        <p:outputLabel value="Security Question:" for="securityQuestion"/>
+                        <p:selectOneMenu id="securityQuestion" value="#{riderController.securityQuestionNumber}">
+                            <!--
+                            List of security questions is displayed for the user to select one.
+                            The first security question is selected as the default.
+                            -->
+                            <f:selectItems value="#{riderController.security_questions}"/>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel/>
+                        <p:outputLabel/>
+
+
+
+
+                        <!--    SECURITY ANSWER      -->
+
+                        <p:outputLabel value="Security Answer:" for="securityAnswer"/>
+                        <p:inputText id="securityAnswer" value="#{riderController.answerToSecurityQuestion}"
+                                     style="width: 290px" required="true"
+                                     requiredMessage="Security Answer is required!">
+                            <f:validateLength minimum="2"/>
+                        </p:inputText>
+
+                        <p:outputLabel/>
+                        <p:outputLabel/>
+
+
+
+                        <p:outputLabel value="Password:" for="password"/>
+                        <p:password id="password" value="#{riderController.password}"
+                                    style="width: 100%;  margin-bottom: 20px"
+                                    feedback="true" required="true" requiredMessage="Password is required!">
+                            <f:validator validatorId="passwordValidator"/>
+                        </p:password>
+
+                        <p:outputLabel value="Confirm Password:" for="confirmPassword"/>
+                        <p:password id="confirmPassword" value="#{riderController.confirmPassword}"
+                                    style="width: 100%;  margin-bottom: 20px"
+                                    required="true" requiredMessage="Confirm Password is required!"/>
+
+                    </p:panelGrid>
+
+
+<!--                    Rider account buttons -->
+                    <div class="rideracntbtns">
+
+
+                        <p:commandButton value="Create" icon="fas fa-arrow-up"
+                                         styleClass="btn1 btn2 createBtn ui-button-outlined ui-button-secondary"
+                                         ajax="false" action="#{riderController.createAccount()}"/>
+                        &nbsp;&nbsp;
+
+                        <p:button id="cancelBtn" outcome="/index" value="Cancel" icon="fas fa-ban"
+                                  styleClass="btn1 ui-button-outlined ui-button-secondary"/>
+                    </div>
+
+
+                </h:form>
+
+
+                <br/><br/>
+
+            </div>
+        </div>
+    </ui:define>
+    <!--    </p:dialog>-->
+</ui:composition>
+</html>

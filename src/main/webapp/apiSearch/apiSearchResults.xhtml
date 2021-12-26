@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+
+<ui:composition template="/template/siteTemplate.xhtml">
+    <ui:define name="title">
+        <h:outputText value="RideNow Blogs"/>
+    </ui:define>
+    <ui:define name="editableContent" id="ui-dataview-grid">
+
+        <c:if test="#{newsApiController.gridOrGallery == 0}">
+        <div style="max-width: 95vw; margin-left: 2vw">
+            <h:form id="SearchedNewsForm">
+                <p:dataView value="#{newsApiController.listOfNews}"
+                            var="aSearchedNews"
+                            rows="6"
+                            styleClass="blockApi"
+                            layout="grid"
+                            gridIcon="false"
+                            listIcon="false"
+                            paginatorPosition="bottom"
+                            paginator="true"
+                            paginatorTemplate="{PreviousPageLink} {NextPageLink} "
+                            pageLinks="5"
+                            style="width:100%; "
+                >
+
+
+                    <f:facet name="header" >
+                        <h:outputText value="RIDE SHARING BLOGS"/>
+                    </f:facet>
+
+                    <p:dataViewGridItem columns="2" >
+                        <p:panel style="text-align: left; box-shadow: -8px -8px 8px -4px darkgray !important">
+                            <h:panelGrid styleClass="blockApi" columns="2" style="width:100%; "
+                                         columnClasses="columnRecipePoster, columnMiddlePart, columnInfoButton">
+
+                                <p:graphicImage url="#{aSearchedNews.photoUrl}" width="180px" height="100px" style="float:left"/>
+
+                                <h:panelGrid style="width:100%; margin-left:10px">
+
+                                    <f:facet name="header">
+                                        <h:outputText value="#{aSearchedNews.title}"/>
+                                    </f:facet>
+
+                                    <br/>
+
+                                    <p:outputLabel value="#{aSearchedNews.author}" style="overflow-x: hidden"/>
+
+                                    <br/>
+
+
+                                    <h:outputText value="#{aSearchedNews.description}" style="float:left;"/>
+
+                                    <br/>
+
+                                    <h:outputLink styleClass="linkBtnApi" target="_blank" value="#{aSearchedNews.url}">Link to Article</h:outputLink>
+
+
+                                </h:panelGrid>
+
+
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:dataViewGridItem>
+
+
+                </p:dataView>
+            </h:form>
+
+        </div>
+        </c:if>
+
+
+        <c:if test="#{newsApiController.gridOrGallery == 1}">
+        <div  class="card" align="center">
+            <p:galleria id="g" value="#{newsApiController.listOfNews}" var="photo" showItemNavigators="true"
+                        showCaption="true" showThumbnails="false" style="width: 640px; height: 640px">
+                <p:graphicImage url="#{photo.photoUrl}" style="width: 100%; height: 100%; display: block;" title=""/>
+                <f:facet name="caption">
+                    <h4><a style="color: white" target="_blank" href="#{photo.url}">#{photo.title}</a></h4>
+                </f:facet>
+                <f:facet name="header">
+                    <h:outputText value="RIDE SHARING BLOGS" style="margin: 3px"/>
+                    <br/><br/>
+                </f:facet>
+            </p:galleria>
+        </div>
+
+            <br />
+            <br />
+
+        </c:if>
+
+        <div align="center">
+        <h:form id="btnForm">
+        <div class="loginButtonsDiv" style="margin-left: -0.3rem">
+        <p:commandButton id="topDrivers" icon="fas fa-th-large" styleClass="metricsbtn rounded-button riderloginsigninbtn"
+                         ajax="false" action="#{newsApiController.changegridOrGallery(0)}" style="margin-right: 10px" />
+        &nbsp;
+        <p:commandButton id="LongestRides" icon="fas fa-image" styleClass="metricsbtn rounded-button riderloginsigninbtn"
+                         ajax="false" action="#{newsApiController.changegridOrGallery(1)}" style="margin-right: 10px" />
+        </div>
+        </h:form>
+        </div>
+
+    </ui:define>
+
+</ui:composition>
+
+</html>

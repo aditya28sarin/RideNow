@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+    <p:dialog id="driverDetails" header="Driver Details" widgetVar="driverDetailsDlg"
+              modal="true" position="center" appendTo="@(body)"
+              showEffect="slide" hideEffect="fade" width="50%" style="overflow-y:auto; max-height: 90vh"
+              responsive="true">
+
+        <div align="center">
+        <h:form id="driverDetailsForm" class="ui-datatable-data">
+            <p:card style="width: 22em">
+                <f:facet name="header">
+                    <p:graphicImage cache="false" styleClass="profilePhoto" value="#{driverController.driverPhoto(rideController.selected.driverID.id)}"/>
+                </f:facet>
+
+                <f:facet name="title">
+                    <div align="center"><h1 style="font-size: 1.2rem; letter-spacing: 3px; color: black">#{rideController.selected.driverID.name} </h1></div>
+                </f:facet>
+
+                <div align="center"><h1 style="font-size: 1.0rem; letter-spacing: 3px; color: black">#{rideController.selected.driverID.phoneNo} </h1></div>
+                <div align="center"><h1 style="font-size: 1.0rem; letter-spacing: 3px; color: black">#{rideController.selected.driverID.interests}</h1></div>
+                <div align="center"><h1 style="font-size: 1.0rem; letter-spacing: 3px; color: black">#{rideController.selected.driverID.overallRating}<i class="pi pi-star" style="font-size:16px"></i></h1></div>
+            </p:card>
+
+
+            <h:panelGroup>
+                <br/>
+                <div style="display: flex; flex-direction: row; justify-content: space-around" align="center">
+                    <!-- CLOSE button -->
+                    <p:commandButton style="margin-bottom: 0.7rem;margin-top: 0" value="Close" icon="fas fa-window-close" styleClass="rounded-button ui-button-secondary"
+                                     onclick="PF('driverDetailsDlg').hide()"/>
+                </div>
+            </h:panelGroup>
+
+        </h:form>
+        </div>
+
+    </p:dialog>
+</ui:composition>
+</html>

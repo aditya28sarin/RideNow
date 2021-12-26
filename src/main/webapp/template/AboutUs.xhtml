@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pe="http://primefaces.org/ui">
+
+<ui:composition template="/template/siteTemplate.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="About Us"/>
+    </ui:define>
+
+    <ui:define name="editableContent">
+        <div class="card aboutuscontainer">
+
+<!--            motivation-->
+            <h3 class="aboutustitle">Motivation</h3>
+            <p class="aboutustxt">Traditional taxi services do not allow users to find fellow riders or drivers who are
+                heading to the same destinations or sharing the same route i.e. the allocation of drivers
+                is purely random, based on availability of taxis/cabs at that particular time. They do not
+                take into consideration an individual’s overall travel experience and safety. Nor do they
+                allow rides to be planned in advance.
+            </p>
+
+<!--            objective-->
+            <p class="aboutustxt">
+                Our objective is to create a ride sharing platform wherein drivers of rideshare vehicles
+                can share the car with riders heading to the same destination thereby making the travel
+                more affordable and help create a more enjoyable travel experience.
+            </p>
+
+            <p:divider align="left">
+                <div class="p-d-inline-flex p-ai-center">
+                    <i class="pi pi-circle-on"/>
+
+                </div>
+            </p:divider>
+
+
+
+            <h3 class="aboutustitle">Why Is It Important To Solve?</h3>
+            <p class="aboutustxt">Ride sharing has many advantages for both riders and drivers. They make travel more
+                affordable (since the cost gets divided between the riders sharing the ride) and make
+                travel time seem faster and enjoyable. They allow riders to choose drivers (and vice-a-
+                versa) they would be more comfortable with increasing a sense of safety.
+                Also, practicing ride sharing would mean fewer cars on the road which would help
+                reduce CO2 emission.
+            </p>
+
+            <p:divider align="left">
+                <div class="p-d-inline-flex p-ai-center">
+                    <i class="pi pi-circle-on"/>
+
+                </div>
+            </p:divider>
+
+            <h3 class="aboutustitle">Creators</h3>
+            <p class="aboutustxt">This application has been created by Mayur Dhepe, Shantanu Deore and Aditya Sarin as a part
+                of the course Software Engineering (CS5704), under the guidance of Professor Osman Balci.
+            </p>
+
+
+
+        </div>
+
+    </ui:define>
+</ui:composition>
+<!-- Do not enter tags after the composition line since they are ignored by JSF -->
+</html>
+
+

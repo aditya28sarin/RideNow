@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/template/siteTemplate.xhtml">
+    <ui:define name="title">
+        <h:outputText value="My Rides"/>
+    </ui:define>
+
+    <ui:define name="editableContent">
+
+        #{rideController.clearRiderHistory()}
+
+        <div align="center"   style="margin-top: 30rem">
+            <h:form id="RiderRidesListForm">
+                <p:panel header="My Rides">
+
+                    <p:dataTable id="datalist"
+                                 value="#{rideController.listOfRiderHistory}"
+                                 var="aRiderRide"
+                                 widgetVar="riderRidesDataTable"
+                                 selectionMode="single"
+                                 selection="#{rideController.selected}"
+                                 reflow="true"
+                                 paginatorPosition="bottom"
+                                 paginator="true"
+                                 rowKey="#{aRiderRide.id}"
+                                 paginatorTemplate="{PreviousPageLink} {NextPageLink}"
+                                 rows="5"
+                                 emptyMessage="You haven't joined any Ride yet"
+                                 rowIndexVar="rowNumber"
+                                 rowsPerPageTemplate="5,10,20,30,40,50"
+                                 first="#{rideController.selectedRowNumber}">
+
+                        <p:ajax event="rowSelect"
+                                update=" viewButton cancelButton viewDriverButton driverRating">
+                            #{rideController.setSelectedRowNumber(rowNumber)};
+                        </p:ajax>
+
+                        <p:ajax event="rowUnselect"
+                                update="cancelButton viewDriverButton driverRating">
+                            #{rideController.unselect()};
+                        </p:ajax>
+
+                        <!--  Column Ride Start Location    -->
+                        <p:column sortBy="#{aRiderRide.startLocation.landmarkName}" headerText="Start Location" style="width: 90px" filterBy="#{aRiderRide.startLocation.landmarkName}" filterMatchMode="contains">
+                            <h:outputText value="#{aRiderRide.startLocation.landmarkName}"/>
+                        </p:column>
+
+                        <!--  Column Ride Destination Location    -->
+                        <p:column sortBy="#{aRiderRide.destinationLocation.landmarkName}"
+                                  headerText="Destination Location" style="width: 90px"
+                                  filterBy="#{aRiderRide.destinationLocation.landmarkName}" filterMatchMode="contains">
+                            <h:outputText value="#{aRiderRide.destinationLocation.landmarkName}"/>
+                        </p:column>
+
+                        <!--  Column Ride Start Time    -->
+                        <p:column sortBy="#{aRiderRide.tripStartTime.toString()}" headerText="Start Time"
+                                  style="width:80px;" filterBy="#{aRiderRide.tripStartTime.toString()}"
+                                  filterMatchMode="contains">
+                            <h:outputText value="#{rideController.getFormattedDate(aRiderRide.tripStartTime)}"/>
+                        </p:column>
+
+                        <!--  Column Ride End Time    -->
+                        <p:column sortBy="#{aRiderRide.tripEndTime.toString()}" headerText="End Time"
+                                  style="width:80px;" filterBy="#{aRiderRide.tripEndTime.toString()}"
+                                  filterMatchMode="contains">
+                            <h:outputText value="#{rideController.getFormattedDate(aRiderRide.tripEndTime)}"/>
+                        </p:column>
+
+                        <!--  Column Ride Status    -->
+                        <p:column sortBy="#{rideController.getRideStatus(aRiderRide.status)}"
+                                  headerText="Status" style="width: 90px"
+                                  filterBy="#{rideController.getRideStatus(aRiderRide.status)}"
+                                  filterMatchMode="contains">
+                            <h:outputText value="#{rideController.getRideStatus(aRiderRide.status)}"/>
+                        </p:column>
+
+<!--                        driver name-->
+                        <p:column sortBy="#{aRiderRide.driverID.name}"
+                                  headerText="Driver Details" style="width: 100px"
+                                  filterBy="#{aRiderRide.driverID.name}" filterMatchMode="contains">
+                            <h:outputText value="#{aRiderRide.driverID.name} (#{aRiderRide.driverID.phoneNo})"/>
+                        </p:column>
+
+<!--                        driver rating-->
+                        <p:column sortBy="#{rideController.getRatingInt(aRiderRide)}"
+                                  headerText="Driver Rating" stye="width: 70px">
+                            <p:rating value="#{rideController.getRatingInt(aRiderRide)}" readonly="true"/>
+                        </p:column>
+
+                        <!--  Column Ride Fare    -->
+                        <p:column sortBy="#{aRiderRide.fare}"
+                                  headerText="Fare"
+                                  style="width: 90px" filterBy="#{aRiderRide.fare}" filterMatchMode="contains">
+                            <h:outputText value="$ #{aRiderRide.fare}"/>
+                        </p:column>
+
+                        <f:facet name="footer">
+                            <div align="center" style="display: flex; flex-direction: row; justify-content: center">
+                                &nbsp;
+<!--                                view ride button-->
+                                <p:commandButton id="viewButton" value="View Ride" icon="fas fa-eye"
+                                                 styleClass="rounded-button"
+                                                 style="display: none"
+                                                 disabled="#{rideController.selected == null}"/>
+
+<!--                                cancel ride button-->
+                                <p:commandButton id="cancelButton" value="Cancel Ride" icon="fas fa-ban"
+                                                 styleClass="rounded-button cancelBtnRiderRides"
+                                                 action="/riderRidesHistory/listRiderRides" ajax="false"
+                                                 actionListener="#{rideController.cancelRide()}"
+                                                 update=":RiderRidesListForm,:growlInfoMessage,:growlWarningMessage,:growlErrorMessage,:growlFatalMessage"
+                                                 disabled="#{rideController.selected == null or rideController.selected.getStatus() != 0}"/>
+                                &nbsp;
+
+<!--                                driver details button-->
+                                <p:commandButton id="viewDriverButton" value="Driver Details" icon="fas fa-eye" styleClass="rounded-button ui-button-secondary"
+                                                 oncomplete="PF('driverDetailsDlg').show()"
+                                                 update=":driverDetailsForm"
+                                                 disabled="#{empty rideController.selected}"/>
+                                &nbsp;
+                                <p:commandButton id="toggler" type="button" value="Columns"
+                                                 styleClass="rounded-button ui-button-secondary"
+                                                 icon="pi pi-align-justify"/>
+                                <p:columnToggler datasource="datalist" trigger="toggler"/>
+
+
+<!--                                export button-->
+                                <p:commandButton value="Export"
+                                                 styleClass="p-mr-2 p-mb-2 rounded-button cancelBtnRiderRides"
+                                                 icon="fas fa-download">
+                                    <p:dataExporter type="csv" target="datalist" fileName="Rider_Rides"/>
+                                </p:commandButton>
+
+<!--                                Rate Ride button-->
+                                <div style="display: flex; flex-direction: row;
+                                align-items: center;  color: white;">
+                                    <p:growl id="messages" showDetail="true"/>
+                                    <h5 class="#{rideController.selected eq null ? 'fadeRating' : 'visibleRating'} ratingClass">Rate Ride</h5>
+                                    <p:rating id="driverRating" value="#{rideController.driverRating}"
+                                              disabled="#{
+                                          rideController.selected == null || (riderController.haveRated()==true || rideController.selected.status!=2)
+                                          }">
+                                        <p:ajax event="rate" listener="#{rideController.onRate}" update="messages"/>
+                                        <p:ajax event="cancel" listener="#{rideController.onRatecancel}"
+                                                update="messages"/>
+                                    </p:rating>
+                                </div>
+
+
+<!--                                back button-->
+                                <p:button id="backButton" icon="fas fa-arrow-left"
+                                          styleClass="rounded-button ui-button-secondary"
+                                          outcome="/index.xhtml" value="Go Back" style="margin-left: 10px"/>
+
+
+                            </div>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+
+
+            </h:form>
+
+        </div>
+
+        <ui:include src="/driverAccount/driverModal.xhtml"/>
+
+    </ui:define>
+</ui:composition>
+</html>

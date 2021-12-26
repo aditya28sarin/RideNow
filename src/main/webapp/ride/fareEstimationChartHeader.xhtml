@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+    <p:dialog id="FareEstimationChartDlg1" header="Fare Estimation Chart" widgetVar="FareEstimationChartDialog1"
+              modal="true" position="center" appendTo="@(body)"
+              showEffect="slide" hideEffect="fade" width="50%" style="overflow-y:auto; max-height: 90vh"
+              responsive="true">
+
+        <h:form id="FareEstimationChartForm1" class="ui-datatable-data">
+            <div class="card">
+                <table class="faresTable">
+                    <tr>
+                        <th>Car</th>
+                        <th>Minimum Fare</th>
+                        <th>Base Fare</th>
+                        <th>Per KM</th>
+                        <th>Per Minute</th>
+                    </tr>
+                    <tr>
+                        <td>Hatchback</td>
+                        <td>$8</td>
+                        <td>$2.55</td>
+                        <td>$1.75</td>
+                        <td>$0.35</td>
+                    </tr>
+                    <tr>
+                        <td>Sedan</td>
+                        <td>$10.5</td>
+                        <td>$3.85</td>
+                        <td>$2.85</td>
+                        <td>$0.5</td>
+                    </tr>
+                    <tr>
+                        <td>SUV</td>
+                        <td>$25</td>
+                        <td>$14</td>
+                        <td>$4.5</td>
+                        <td>$0.8</td>
+                    </tr>
+                </table>
+            </div>
+            <br/>
+
+
+            <div align="center" style="width: 100%">
+                <p style="font-weight: bold; font-style: italic; padding: 0.5rem; background-color: black; color: white; box-shadow:1px 1px 1px 1px lightgray; width: 20%">Ride Fare </p>
+                <p style="font-style: italic; padding: 0.5rem; box-shadow: 1px 1px 1px 1px lightgray ">Base Fare + (Cost per minute * ride duration) + (Cost per km) * ride distance) + Minimum Fare</p>
+
+                <p style="font-weight: bold; font-style: italic; padding: 0.5rem; background-color: black; color: white; box-shadow:1px 1px 1px 1px lightgray; width: 20%">Ride Fare per rider</p>
+                <p style="font-style: italic; padding: 0.5rem; box-shadow: 1px 1px 1px 1px lightgray ">(Base Fare + (Cost per minute * ride duration) + (Cost per km) * ride distance) + Minimum Fare) / Car Capacity</p>
+
+            </div>
+
+
+            <h:panelGroup>
+                <br/>
+                <div style="display: flex; flex-direction: row; justify-content: space-around" align="center">
+                    <!-- CLOSE button -->
+                    <p:commandButton style="margin-bottom: 0.7rem;margin-top: 0" value="Close" icon="fas fa-window-close" styleClass="rounded-button ui-button-secondary"
+                                     onclick="PF('FareEstimationChartDialog1').hide()"/>
+
+                    <p:commandButton value="Print" type="button" icon="pi pi-print" styleClass="p-d-block p-shadow-2 p-mb-3">
+                        <p:printer target="FareEstimationChartForm1"/>
+                    </p:commandButton>
+                </div>
+            </h:panelGroup>
+
+        </h:form>
+
+
+
+
+    </p:dialog>
+</ui:composition>
+</html>

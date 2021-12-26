@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+<ui:composition template="/template/siteTemplate.xhtml">
+    <ui:define name="title">
+        <h:outputText value="Metrics"/>
+    </ui:define>
+
+    <ui:define name="editableContent">
+
+
+
+        <c:if test="#{metricController.metricType == 0}">
+            <div  align="center">
+                <h:form id="AvailableRidesListForm">
+                    <p:panel header="LONGEST RIDES">
+
+                        <p:dataTable id="datalist2"
+                                     value="#{metricController.listOfTopLongestRides}"
+                                     var="aRide"
+                                     widgetVar="availableRidesDataTable"
+                                     selectionMode="single"
+                                     reflow="true"
+                                     stripedRows="true"
+                                     rowKey="#{aRide.id}"
+                                     rows="5"
+                                     rowIndexVar="rowNumber"
+                                     first="#{metricController.selectedRowNumber}">
+
+                            <!--  Column Ride Start Location    -->
+                            <p:column width="30px" headerText="Start Location">
+                                <h:outputText style="display: block; width:100%; text-align:center;" value="#{aRide.startLocation.landmarkName}"/>
+                            </p:column>
+
+                            <!--  Column Ride Destination Location    -->
+                            <p:column width="45px" headerText="Destination Location">
+                               <h:outputText style="display: block; width:100%; text-align:center;" value="#{aRide.destinationLocation.landmarkName}"/>
+                            </p:column>
+
+                            <!--  Column Riders   -->
+                            <p:column  headerText="Distance" style="width:60px;">
+                                <h:outputText style="display: block; width:100%; text-align:center;" value="#{aRide.distance}"/>
+                            </p:column>
+
+                            <!--  Column Ride Start Time    -->
+                            <p:column headerText="Ride Start Time" style="width:60px;">
+                                <h:outputText style="display: block; width:100%; text-align:center;" value="#{rideController.getFormattedDate(aRide.tripStartTime)}"/>
+                            </p:column>
+
+                            <p:column  headerText="Ride End Time" style="width:60px;">
+                                <h:outputText style="display: block; width:100%; text-align:center;" value="#{rideController.getFormattedDate(aRide.tripEndTime)}"/>
+                            </p:column>
+
+                            <p:column  headerText="Driver" style="width:60px;">
+                                <h:outputText style="display: block; width:100%; text-align:center;" value="#{aRide.driverID.name}"/>
+                            </p:column>
+
+                            <f:facet name="footer">
+                            </f:facet>
+                        </p:dataTable>
+                    </p:panel>
+
+                </h:form>
+            </div>
+        </c:if>
+
+        <c:if test="#{metricController.metricType == 1}">
+            <div align="center">
+                <h:form id="ShortestRidesListForm">
+                    <p:panel header="SHORTEST RIDES">
+
+                        <p:dataTable id="datalist1"
+                                     value="#{metricController.listOfTopShortestRides}"
+                                     var="aRide"
+                                     widgetVar="availableRidesDataTable"
+                                     selectionMode="single"
+                                     reflow="true"
+                                     rowKey="#{aRide.id}"
+                                     rows="5"
+                                     stripedRows="true"
+                                     rowIndexVar="rowNumber"
+                                     first="#{metricController.selectedRowNumber}">
+
+                            <!--  Column Ride Start Location    -->
+                            <p:column width="30px" headerText="Start Location">
+                                <h:outputText style="display: block; width:100%; text-align:center;" value="#{aRide.startLocation.landmarkName}"/>
+                            </p:column>
+
+                            <!--  Column Ride Destination Location    -->
+                            <p:column width="45px" headerText="Destination Location">
+                                <h:outputText style="display: block; width:100%; text-align:center;" value="#{aRide.destinationLocation.landmarkName}"/>
+                            </p:column>
+
+                            <!--  Column Riders   -->
+                            <p:column  headerText="Distance" style="width:60px;">
+                                <h:outputText style="display: block; width:100%; text-align:center;" value="#{aRide.distance}"/>
+                            </p:column>
+
+                            <!--  Column Ride Start Time    -->
+                            <p:column headerText="Ride Start Time" style="width:60px;">
+                                <h:outputText style="display: block; width:100%; text-align:center;" value="#{rideController.getFormattedDate(aRide.tripStartTime)}"/>
+                            </p:column>
+
+                            <p:column  headerText="Ride End Time" style="width:60px;">
+                                <h:outputText style="display: block; width:100%; text-align:center;" value="#{rideController.getFormattedDate(aRide.tripEndTime)}"/>
+                            </p:column>
+
+                            <p:column  headerText="Driver" style="width:60px;">
+                                <h:outputText style="display: block; width:100%; text-align:center;" value="#{aRide.driverID.name}"/>
+                            </p:column>
+
+                            <f:facet name="footer">
+                            </f:facet>
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+            </div>
+        </c:if>
+
+        <c:if test="#{metricController.metricType == 2}">
+            <div align="center">
+                <h:form id="TopRidersForm">
+                    <p:panel header="TOP DRIVERS">
+
+                        <p:dataTable id="datalist3"
+                                     value="#{metricController.listOfTopDrivers}"
+                                     var="aDriver"
+                                     widgetVar="availableRidesDataTable"
+                                     selectionMode="single"
+                                     reflow="true"
+                                     rowKey="#{aDriver.id}"
+                                     rows="5"
+                                     stripedRows="true"
+                                     rowIndexVar="rowNumber"
+                                     first="#{metricController.selectedRowNumber}">
+
+                            <!--  Column Ride Start Location    -->
+                            <p:column headerText="Name">
+                                <h:outputText value="#{aDriver.name}" style="display: block; width:100%; text-align:center;"/>
+                            </p:column>
+
+                            <!--  Column Ride Destination Location    -->
+                            <p:column headerText="Rating">
+                                <!--div align="center"><h:outputText value="#{aDriver.overallRating}"/></div-->
+
+                                <p:rating value="#{rideController.getRatingInt(aDriver.overallRating)}" readonly="true" />
+
+                            </p:column>
+
+                            <!--  Column Ride Start Location    -->
+                            <p:column headerText="Total kms Driven">
+                                <h:outputText value="#{aDriver.totalKmsDriven}" style="display: block; width:100%; text-align:center;"/>
+                            </p:column>
+
+                            <!--  Column Ride Destination Location    -->
+                            <p:column headerText="Gender">
+                                <h:outputText value="#{aDriver.gender}" style="display: block; width:100%; text-align:center;"/>
+                            </p:column>
+
+                            <!--  Column Ride Destination Location    -->
+                            <p:column headerText="Trips">
+                                <h:outputText value="#{aDriver.numberOfTrips}" style="display: block; width:100%; text-align:center;"/>
+                            </p:column>
+
+                            <!--  Column Ride Destination Location    -->
+                            <p:column headerText="Interests">
+                                <h:outputText style="display: block; width:100%; text-align:center;" value="#{aDriver.interests}"/>
+                            </p:column>
+
+                            <f:facet name="footer">
+                            </f:facet>
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+            </div>
+        </c:if>
+
+        <br /><br />
+
+        <div align="center">
+            <h:form id="btnForm">
+                <div class="loginButtonsDiv">
+                    <p:commandButton id="topDrivers" value="Top Drivers" icon="fas fa-user" styleClass="metricsbtn rounded-button riderloginsigninbtn"
+                                     ajax="false" action="#{metricController.setMetricTypeAndGetData(2)}" style="margin-right: 10px" />
+                    &nbsp;
+                    <p:commandButton id="LongestRides" value="Longest Rides" icon="fas fa-car" styleClass="metricsbtn rounded-button riderloginsigninbtn"
+                                     ajax="false" action="#{metricController.setMetricTypeAndGetData(0)}" style="margin-right: 10px" />
+                    &nbsp;
+                    <p:commandButton id="ShortestRides" value="Shortest Rides" icon="fas fa-car" styleClass="metricsbtn rounded-button riderloginsigninbtn"
+                                     ajax="false" action="#{metricController.setMetricTypeAndGetData(1)}" style="margin-right: 10px" />
+                    &nbsp;
+
+
+                    <c:if test="#{metricController.metricType == 0}">
+                    <p:commandButton value="Export" styleClass="p-mr-2 p-mb-2 rounded-button cancelBtnRiderRides" icon="fas fa-download">
+                        <p:dataExporter type="csv" target="AvailableRidesListForm:datalist2" fileName="Longest_Rides" />
+                    </p:commandButton>
+                    </c:if>
+                    <c:if test="#{metricController.metricType == 1}">
+                        <p:commandButton value="Export" styleClass="p-mr-2 p-mb-2 rounded-button cancelBtnRiderRides" icon="fas fa-download">
+                            <p:dataExporter type="csv" target="ShortestRidesListForm:datalist1" fileName="Shortest_Rides" />
+                        </p:commandButton>
+                    </c:if>
+                    <c:if test="#{metricController.metricType == 2}">
+                        <p:commandButton value="Export" styleClass="p-mr-2 p-mb-2 rounded-button cancelBtnRiderRides" icon="fas fa-download">
+                            <p:dataExporter type="csv" target="TopRidersForm:datalist3" fileName="Top_Drivers" />
+                        </p:commandButton>
+                    </c:if>
+                    &nbsp;
+                    <p:button id="backButton" icon="fas fa-arrow-left" styleClass="rounded-button ui-button-secondary"
+                              outcome="/index.xhtml" value="Go Back" style="margin-left: 10px"/>
+
+                </div>
+            </h:form>
+        </div>
+
+
+
+    </ui:define>
+</ui:composition>
+</html>
